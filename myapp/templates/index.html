@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=<1.0>">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+    
+        
+    <title>TODOAPP</title>
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+</head>
+<body class="bg-gray-500 flex flex-col gap-5 items-center p-10 ">
+  
+    <!--{% for task in tasks %}
+        {{ task.title }} <br>
+        {{ task.desceprition }} <br>
+    {% endfor %}-->
+{% for task in tasks %}    
+    <div class="bg-white W-[335xl] p-5 rounded-xl justify-between flex flex-col">
+        <div class="flex justify-between items-center">
+            
+        <p class="text-green-600 font-bold text-xl  {% if task.completed %}
+          line-through
+    {% endif %}">{{ task.title }}  </p> 
+            
+        <a href="{% url 'toggle_completed' task.id %}"><br>
+        <i class='bxr  bx-check-circle text-2xl text-blue-600'  ></i>
+        </a>
+        </div>
+        
+        <p class="text-blue-700 font-bold text-xl text-left "> {{ task.desceprition }} </p><br>
+        <hr>
+        <div class="flex justify-between items-center">
+            {% if task.completed %}
+            <p class="text-red-600 font-bold">Task Completed</p>
+            {% else %}
+            <span class="font-bold text-gray-600">Due,{{task.due_time}}</span> <span class="font-semibold text-gray-600">{{task.due_date}}</span> </p>
+             {% endif %}
+             <a href="{% url 'delete' task.id %}">
+
+            <i class='bxr  bx-trash text-red-600 text-2xl' ></i> 
+            </a>
+        </div>
+         
+        
+    </div>
+{% endfor %}
+</body>
+</html>
+
